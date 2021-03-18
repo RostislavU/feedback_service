@@ -1,1 +1,6 @@
-# news_service
+# feedback_service
+
+Stack:
+- java
+- spring
+- postgresql
