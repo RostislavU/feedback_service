@@ -12,14 +12,13 @@ stop:
 
 package:
 	./mvnw clean package -DskipTests
-	cp target/feedback_service.jar src/main/docker
 
 # Docker
-build:
+run_container:
 	cd src/main/docker/ && docker-compose up
 
-stop:
+stop_container:
 	cd src/main/docker/ && docker-compose down
 
-rebuild:
+rebuild_container:
 	cd src/main/docker/ && docker-compose down && docker rmi feedback-service:latest && docker-compose up

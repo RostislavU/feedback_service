@@ -1,4 +1,3 @@
-FROM adoptopenjdk:11-jre-hotspot
-ARG JAR_FILE=*.jar
-COPY ${JAR_FILE} application.jar
+FROM openjdk:8-jre-alpine
+COPY target/*.jar application.jar
 ENTRYPOINT ["java", "-jar", "application.jar"]

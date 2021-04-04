@@ -1,11 +1,12 @@
 # feedback_service
 
-Stack:
 - java
 - spring
 - postgresql
+- hibernate
 
 ---
+## Run
 Запуск приложения:
 ```shell
 make run
@@ -15,3 +16,19 @@ make run
 ```shell
 make stop
 ```
+
+---
+## Docker
+
+- База данных на localhost:8001
+- Приложение на localhost:8000
+
+Сборка
+```shell
+make run_container
+```
+
+Данные для подключения к БД в файле docker-compose.yml
+
+
+
