@@ -1,17 +1,18 @@
-create_maven:
-	mvn -N io.takari:maven:wrapper
-
+# Установка зависимостей
 install:
-	./mvnw clean dependency:resolve
+	mvn clean dependency:resolve
 
+# Локальный запуск
 run:
-	./mvnw spring-boot:run
+	mvn spring-boot:run
 
 stop:
-	./mvnw spring-boot:stop
+	mvn spring-boot:stop
 
+# Упаковка программы
 package:
-	./mvnw clean package -DskipTests
+	mvn package spring-boot:repackage
+	yes | cp -rf target/feedback_service.jar src/main/docker/feedback_service.jar
 
 # Docker
 run_container:
