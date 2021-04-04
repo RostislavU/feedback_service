@@ -7,17 +7,31 @@
   <groupId>ru.experts.feedback</groupId>
   <artifactId>feedback_service</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
-  <name>feedback_service Maven Webapp</name>
+  <name>feedback_service</name>
   <url>https://github.com/RostislavU/feedback_service</url>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.4.4</version>
+  </parent>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-    <spring.version>5.3.5</spring.version>
-    <spring_boot.version>2.4.4</spring_boot.version>
+    <!-- Spring -->
+    <spring-framework.version>5.3.5</spring-framework.version>
+    <spring-boot.version>2.4.4</spring-boot.version>
+    <!-- Hibernate / JPA -->
+    <hibernate.version>5.4.30.Final</hibernate.version>
+    <!-- Postgresql -->
+    <postgresql.version>42.2.19</postgresql.version>
+    <!-- Logging -->
+    <logback.version>1.0.13</logback.version>
+    <slf4j.version>1.7.5</slf4j.version>
   </properties>
 
   <dependencies>
@@ -28,51 +42,60 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+    <!-- Spring -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>${spring.version}</version>
+      <version>${spring-framework.version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
+      <version>${spring-framework.version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>${spring.version}</version>
+      <version>${spring-framework.version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>${spring.version}</version>
+      <version>${spring-framework.version}</version>
     </dependency>
 
+    <!-- Spring ORM support -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+    <!-- Postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${postgresql.version}</version>
+    </dependency>
+
+    <!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>${spring_boot.version}</version>
+      <version>${spring-boot.version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <version>${spring_boot.version}</version>
+      <version>${spring-boot.version}</version>
       <scope>test</scope>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+    <!-- Javax -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -80,7 +103,48 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- Logging with SLF4J & LogBack -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>compile</scope>
+    </dependency>
 
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Hibernate -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.200</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>2.3.9.RELEASE</version>
+    </dependency>
 
   </dependencies>
 
@@ -117,9 +181,21 @@
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
         </plugin>
+
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
+          <configuration>
+            <fork>true</fork>
+            <mainClass>ru.experts.feedback.FeedbackApplication</mainClass>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
