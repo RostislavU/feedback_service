@@ -1,40 +1,40 @@
 package ru.experts.feedback.domain;
 
-import ru.experts.feedback.enums.Service;
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
-@Table(name="feedback")
+@Table(name = "feedbacks")
 public class Feedback {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
-    @Column(name="first_name", length=32)
-    private String firstName;
+    @Column(name = "full_name", length=64)
+    private String fullName;
 
-    @Column(name="last_name", length=32)
-    private String lastName;
-
-    @Column(name="email", length=64)
+    @Column(name = "email", length=64)
     private String email;
 
-    @Column(name="is_anonymously")
+    @Column(name = "is_anonymously")
     private boolean isAnonymously;
-
-    private Service service;
-
-    @Column(name="text", length=1024)
-    private String text;
 
     @Column(name = "create_datetime")
     @Temporal(TemporalType.DATE)
     private Date createDatetime;
 
-    private Short rating;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feedback")
+    private Set<Answer> answers;
 
+    @ManyToOne
+    @JoinColumn (name="service_id", referencedColumnName = "id")
+    private Service service;
+
+    @ManyToOne
+    @JoinColumn (name="template_id", referencedColumnName = "id")
+    private Template template;
 
 }

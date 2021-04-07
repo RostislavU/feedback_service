@@ -1,5 +1,5 @@
 # Установка зависимостей
-install:
+dependency:
 	mvn clean dependency:resolve
 
 # Локальный запуск
