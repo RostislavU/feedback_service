@@ -17,6 +17,9 @@ public class Template {
     @Temporal(TemporalType.DATE)
     private Date createDatetime;
 
+    @Column(name = "creator", length=64)
+    private String creator;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "templates_questions",
