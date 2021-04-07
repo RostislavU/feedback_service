@@ -9,7 +9,7 @@
 ---
 Установка зависимостей
 ```shell
-make install
+make env
 ```
 
 ## Локальный запуск
@@ -42,6 +42,15 @@ make package
 make run_container
 ```
 
+Пересборка с изменениями в исходном коде и одновременный запуск в контейнере:
+```shell
+make rebuild_container
+```
+
+Остановка контейнера:
+```shell
+make stop_container
+```
 
 
 
