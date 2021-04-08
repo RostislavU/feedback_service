@@ -20,6 +20,9 @@ public class Template {
     @Column(name = "creator", length=64)
     private String creator;
 
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "templates_questions",
@@ -31,4 +34,16 @@ public class Template {
     @ManyToOne
     @JoinColumn (name="template_id", referencedColumnName = "id")
     private Service serviceId;
+
+
+    public Template() {
+    }
+
+    public void changeDeleted() {
+        isDeleted = !isDeleted;
+    }
+
+    public boolean getIsDeleted(){
+        return isDeleted;
+    }
 }
