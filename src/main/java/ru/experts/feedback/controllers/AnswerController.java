@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import ru.experts.feedback.domain.Answer;
-import ru.experts.feedback.exceptions.AnswerNotFoundException;
+import ru.experts.feedback.exceptions.NotFoundException;
 import ru.experts.feedback.repositories.AnswerRepository;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class AnswerController {
     @GetMapping("/{id}")
     public Answer getById(@PathVariable("id") UUID id){
         log.debug("Get answer by id" + id);
-        return repository.findById(id).orElseThrow(() -> new AnswerNotFoundException(id));
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Не найден ответ с id " + id));
     }
 
     @PostMapping("/create")

@@ -8,19 +8,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.UUID;
 
-public class AnswerNotFoundException extends RuntimeException{
-    public AnswerNotFoundException(UUID id) {
-        super("Could not find answer by id: " + id);
+public class NotFoundException extends RuntimeException{
+    public NotFoundException(String message) {
+        super();
     }
 }
 
+
 @ControllerAdvice
-class AnswerNotFoundAdvice {
+class FeedbackNotFoundAdvice {
 
     @ResponseBody
-    @ExceptionHandler(AnswerNotFoundException.class)
+    @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String answerNotFoundHandler(AnswerNotFoundException ex) {
+    public String feedbackNotFoundHandler(NotFoundException ex) {
         return ex.getMessage();
     }
 }

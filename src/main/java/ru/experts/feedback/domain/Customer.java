@@ -6,8 +6,8 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "services")
-public class Service {
+@Table(name = "customers")
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +19,6 @@ public class Service {
     @Column(name = "hash", length = 32)
     private String hash;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Feedback> feedbacks;
 }

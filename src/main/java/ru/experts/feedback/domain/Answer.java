@@ -1,9 +1,11 @@
 package ru.experts.feedback.domain;
 
+import lombok.Data;
+
 import javax.persistence.*;
-import java.util.Set;
 import java.util.UUID;
 
+@Data
 @Entity
 @Table(name = "answers")
 public class Answer {
@@ -25,4 +27,6 @@ public class Answer {
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private Question question;
 
+    public Answer() {
+    }
 }

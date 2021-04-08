@@ -1,11 +1,15 @@
 package ru.experts.feedback.domain;
 
+import lombok.Builder;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Builder
 @Table(name = "templates")
 public class Template {
 
@@ -13,9 +17,12 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "name", length=64)
+    private String name;
+
     @Column(name = "create_datetime")
     @Temporal(TemporalType.DATE)
-    private Date createDatetime;
+    private LocalDateTime createDatetime;
 
     @Column(name = "creator", length=64)
     private String creator;
@@ -31,17 +38,13 @@ public class Template {
     )
     private Set<Question> questions;
 
-    @ManyToOne
-    @JoinColumn (name="template_id", referencedColumnName = "id")
-    private Service serviceId;
-
-
     public Template() {
     }
 
-    public void changeDeleted() {
-        isDeleted = !isDeleted;
+    public void setDeleted() {
+        isDeleted = true;
     }
+
 
     public boolean getIsDeleted(){
         return isDeleted;

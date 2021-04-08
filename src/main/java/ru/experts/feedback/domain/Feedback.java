@@ -1,10 +1,14 @@
 package ru.experts.feedback.domain;
 
+import lombok.Builder;
+
 import javax.persistence.*;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+@Builder
 @Entity
 @Table(name = "feedbacks")
 public class Feedback {
@@ -24,14 +28,14 @@ public class Feedback {
 
     @Column(name = "create_datetime")
     @Temporal(TemporalType.DATE)
-    private Date createDatetime;
+    private LocalDateTime createDatetime;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "feedback")
     private Set<Answer> answers;
 
     @ManyToOne
-    @JoinColumn (name="service_id", referencedColumnName = "id")
-    private Service service;
+    @JoinColumn (name="customer_id", referencedColumnName = "id")
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn (name="template_id", referencedColumnName = "id")

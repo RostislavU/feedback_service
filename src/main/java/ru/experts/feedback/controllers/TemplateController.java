@@ -1,12 +1,9 @@
 package ru.experts.feedback.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import ru.experts.feedback.domain.Template;
-import ru.experts.feedback.exceptions.FeedbackNotFoundException;
-import ru.experts.feedback.exceptions.TemplateNotFoundException;
-import ru.experts.feedback.repositories.TemplateRepository;
+import ru.experts.feedback.dto.EditTemplateRequest;
+import ru.experts.feedback.services.template.TemplateService;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,41 +12,32 @@ import java.util.UUID;
 @RequestMapping("/templates")
 public class TemplateController {
 
-    private static final Logger log = LoggerFactory.getLogger(FeedbackController.class);
-
-    private final TemplateRepository repository;
-
-    public TemplateController(TemplateRepository repository) {
-        this.repository = repository;
-    }
+    private TemplateService templateService;
 
 
     @GetMapping()
     public List<Template> getAll(){
-        log.debug("get all templates");
-        return repository.findAll();
+        return templateService.getAll();
     }
 
     @GetMapping("/{id}")
     public Template getById(@PathVariable("id") UUID id){
-        log.debug("get template by id" + id);
-        return repository.findById(id).orElseThrow(() -> new FeedbackNotFoundException(id));
+        return templateService.getById(id);
     }
 
     @PostMapping("/create")
-    public Template create(@RequestBody Template template){
-        log.debug("Create new template");
-        return repository.save(template);
+    public Template create(@RequestBody EditTemplateRequest request){
+        return templateService.create(request);
     }
 
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable("id") UUID id){
-        log.debug("Delete template");
-        repository.findById(id).
-                map(template -> {
-                    template.changeDeleted();
-                    return template;
-                })
-                .orElseThrow(()-> new TemplateNotFoundException(id));
+        templateService.delete(id);
     }
+
+    /*
+    @GetMapping("/{template-id}/add-question/{question-id}")
+    public Template addQuestion(@PathVariable("template-id") UUID templateId, @PathVariable("question-id") UUID questionId){
+        ...
+    }*/
 }
