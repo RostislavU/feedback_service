@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.experts.feedback.domain.Feedback;
 import ru.experts.feedback.domain.Customer;
 import ru.experts.feedback.domain.Template;
+import ru.experts.feedback.dto.EditFeedbackRequest;
 import ru.experts.feedback.repositories.FeedbackRepository;
 
 import static java.time.LocalDateTime.now;
@@ -17,15 +18,14 @@ public class FeedbackCreator {
         this.repository = repository;
     }
 
-    public Feedback createForService(Customer customer, String email, String fullName, boolean isAnonymously, Template template){
-
+    public Feedback createForCustomer(EditFeedbackRequest request, Template template){
 
         return Feedback.builder()
                 .createDatetime(now())
-                .customer(customer)
-                .email(email)
-                .fullName(fullName)
-                .isAnonymously(isAnonymously)
+                .customer(request.getCustomer())
+                .email(request.getEmail())
+                .fullName(request.getFullName())
+                .isAnonymously(false)
                 .template(template)
                 .build();
     }
