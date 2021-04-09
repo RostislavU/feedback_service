@@ -16,12 +16,12 @@ public class NotFoundException extends RuntimeException{
 
 
 @ControllerAdvice
-class FeedbackNotFoundAdvice {
+class NotFoundAdvice {
 
     @ResponseBody
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String feedbackNotFoundHandler(NotFoundException ex) {
+    public String notFoundHandler(NotFoundException ex) {
         return ex.getMessage();
     }
 }
