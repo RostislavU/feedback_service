@@ -19,9 +19,14 @@ run_container:
 	cd src/main/docker/ && docker-compose up
 
 stop_container:
-	cd src/main/docker/ && docker-compose down
+	cd src/main/docker/ && docker-compose stop
 
 rebuild_container:
 	mvn package spring-boot:repackage && \
 	yes | cp -rf target/feedback_service.jar src/main/docker/feedback_service.jar && \
 	cd src/main/docker/ && docker-compose down && docker rmi feedback-service:latest && docker-compose up
+
+rebuild_container_with_saving:
+	mvn package spring-boot:repackage && \
+	yes | cp -rf target/feedback_service.jar src/main/docker/feedback_service.jar && \
+	cd src/main/docker/ && docker-compose sop && docker rmi feedback-service:latest && docker-compose up
