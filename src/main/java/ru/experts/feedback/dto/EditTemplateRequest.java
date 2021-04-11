@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Сущность для изменения/создания шаблона
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
