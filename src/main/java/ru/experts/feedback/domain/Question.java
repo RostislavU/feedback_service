@@ -1,31 +1,45 @@
 package ru.experts.feedback.domain;
 
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.experts.feedback.enums.QuestionType;
 
 import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Вопрос для формы обратной связи
+ */
+@Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "questions")
 public class Question {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private UUID id;
 
-    @Column(name = "text", length = 1024)
+    @NotNull
+    @Column(name = "text", length = 1024, nullable = false)
     private String text;
 
+    @NotNull
+    @Column(name = "type", nullable = false)
     private QuestionType type;
 
     @Column(name = "struct", length = 1024)
     private String struct;
 
-    private boolean hidden;
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
-    private Set<Answer> answers;
+    @OneToMany(mappedBy = "question")
+    private Set<OrderedQuestion> order;
 
-    @ManyToMany(mappedBy = "questions")
-    private Set<Template> template;
 }

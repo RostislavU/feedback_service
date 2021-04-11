@@ -1,11 +1,22 @@
 package ru.experts.feedback.domain;
 
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Шаблон с вопросами
+ */
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "templates")
 public class Template {
 
@@ -13,19 +24,44 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "create_datetime")
-    @Temporal(TemporalType.DATE)
-    private Date createDatetime;
+    @NotNull
+    @Column(name = "name", length=64, nullable = false)
+    private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "templates_questions",
-            joinColumns = @JoinColumn(name = "question_id") ,
-            inverseJoinColumns = @JoinColumn(name = "template_id")
-    )
-    private Set<Question> questions;
+    @Column(name = "comment", length = 1024)
+    private String comment;
+
+    @NotNull
+    @Column(name = "create_datetime", nullable = false)
+    private LocalDateTime createDatetime;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
+    @Column(name = "is_available")
+    private boolean isAvailable;
 
     @ManyToOne
-    @JoinColumn (name="template_id", referencedColumnName = "id")
-    private Service serviceId;
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private Owner owner;
+
+    @OneToMany(mappedBy = "template")
+    private Set<OrderedQuestion> orderedQuestions;
+
+
+    public void setDeleted() {
+        isDeleted = true;
+    }
+
+    public void setPrivate() {
+        isAvailable = false;
+    }
+
+    public void setAvailable() {
+        isAvailable = true;
+    }
+
+    public boolean getIsDeleted(){
+        return isDeleted;
+    }
 }

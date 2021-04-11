@@ -1,33 +1,41 @@
 package ru.experts.feedback.controllers;
 
-import org.springframework.stereotype.Controller;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import ru.experts.feedback.domain.Feedback;
+import ru.experts.feedback.exceptions.NotFoundException;
+import ru.experts.feedback.repositories.FeedbackRepository;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
+@Slf4j
 @RequestMapping("/feedbacks")
 public class FeedbackController {
 
+    private final FeedbackRepository repository;
+
+    public FeedbackController(FeedbackRepository repository) {
+        this.repository = repository;
+    }
+
     @GetMapping()
-    public String getAll(){
-        System.out.println("Get all feedbacks");
-        return null;
+    public List<Feedback> getAll(){
+        log.debug("get all feedbacks");
+        return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public String getById(@PathVariable("id") int id){
-        System.out.println("Get feedback by id: " + id);
-        return null;
+    public Feedback getById(@PathVariable("id") UUID id){
+        log.debug("get feedback by id" + id);
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Не найден фидбек с id" + id));
     }
 
-    @PostMapping("/new")
-    public boolean create(){
-        System.out.println("Create new feedback");
-        return false;
+    @PostMapping("/create")
+    public Feedback create(@RequestBody Feedback feedback){
+        log.debug("Create new feedback");
+        return repository.save(feedback);
     }
 
-    @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable("id") int id){
-        System.out.println("Delete by id: " + id);
-        return false;
-    }
 }
