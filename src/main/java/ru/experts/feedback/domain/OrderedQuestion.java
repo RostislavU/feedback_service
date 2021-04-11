@@ -29,6 +29,6 @@ public class OrderedQuestion {
      * Назначать кратное 100
      */
     @NotNull
-    @Column(name = "order", nullable = false)
-    public int order;
+    @Column(name = "view_order", nullable = false)
+    public int view_order;
 }
