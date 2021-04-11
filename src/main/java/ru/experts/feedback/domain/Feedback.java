@@ -1,6 +1,9 @@
 package ru.experts.feedback.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -8,8 +11,11 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@Builder
+@Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "feedbacks")
 public class Feedback {
 
@@ -27,7 +33,6 @@ public class Feedback {
     private boolean isAnonymously;
 
     @Column(name = "create_datetime")
-    @Temporal(TemporalType.DATE)
     private LocalDateTime createDatetime;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "feedback")
