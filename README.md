@@ -9,7 +9,7 @@
 ---
 Установка зависимостей
 ```shell
-make install
+make env
 ```
 
 ## Локальный запуск
@@ -39,9 +39,20 @@ make package
 Запустить сборку и запуск образа:
 
 ```shell
-make run_container
+make run_container 
 ```
 
+Пересборка с изменениями в исходном коде и одновременный запуск в контейнере (+ очистка БД):
+```shell
+make rebuild_container
+```
 
+Пересборка с изменениями в исходном коде и одновременный запуск в контейнере (сохраняет БД):
+```shell
+make rebuild_container_with_saving
+```
 
-
+Остановка контейнера (сохраняет БД):
+```shell
+make stop_container
+```
