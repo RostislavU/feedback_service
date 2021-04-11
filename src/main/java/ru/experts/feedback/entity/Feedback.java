@@ -13,13 +13,13 @@ public class Feedback {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="first_name", length=32)
+    @Column(name="first_name", length=128)
     private String firstName;
 
-    @Column(name="last_name", length=32)
+    @Column(name="last_name", length=128)
     private String lastName;
 
-    @Column(name="email", length=64)
+    @Column(name="email", length=128)
     private String email;
 
     @Column(name="is_anonymously")
@@ -27,14 +27,11 @@ public class Feedback {
 
     private Service service;
 
-    @Column(name="text", length=1024)
+    @Column(name="text", length=4096)
     private String text;
 
     @Column(name = "create_datetime")
     @Temporal(TemporalType.DATE)
     private Date createDatetime;
-
-    private Short rating;
-
 
 }
