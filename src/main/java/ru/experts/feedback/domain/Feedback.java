@@ -1,5 +1,6 @@
 package ru.experts.feedback.domain;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,10 +8,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Обратная связь
+ */
 @Data
 @Entity
 @Builder
@@ -23,27 +26,17 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "full_name", length=64)
-    private String fullName;
+    @Embedded
+    private CreationInfo creationInfo;
 
-    @Column(name = "email", length=64)
-    private String email;
+    @NotNull
+    @Column(name = "template_id", nullable = false)
+    private UUID templateId;
 
-    @Column(name = "is_anonymously")
-    private boolean isAnonymously;
-
-    @Column(name = "create_datetime")
-    private LocalDateTime createDatetime;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "feedback")
+    @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL)
     private Set<Answer> answers;
 
-    @ManyToOne
-    @JoinColumn (name="customer_id", referencedColumnName = "id")
-    private Customer customer;
-
-    @ManyToOne
-    @JoinColumn (name="template_id", referencedColumnName = "id")
-    private Template template;
+    @Column(name = "is_read")
+    private boolean isRead;
 
 }

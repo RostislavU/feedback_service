@@ -1,17 +1,27 @@
 package ru.experts.feedback.domain;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.UUID;
 
+/**
+ * Ответы на вопросы
+ */
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "answers")
 public class Answer {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private UUID id;
+
+    @NotNull
+    @Column(name = "question_id", nullable = false)
+    private UUID questionId;
 
     @Column(name = "value", length = 1024)
     private String value;
@@ -23,10 +33,4 @@ public class Answer {
     @JoinColumn(name = "feedback_id", referencedColumnName = "id")
     private Feedback feedback;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id", referencedColumnName = "id")
-    private Question question;
-
-    public Answer() {
-    }
 }

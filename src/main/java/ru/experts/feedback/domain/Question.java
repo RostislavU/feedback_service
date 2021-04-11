@@ -11,6 +11,9 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Вопрос для формы обратной связи
+ */
 @Data
 @Entity
 @Builder
@@ -23,10 +26,11 @@ public class Question {
     private UUID id;
 
     @NotNull
-    @Column(name = "text", length = 1024)
+    @Column(name = "text", length = 1024, nullable = false)
     private String text;
 
     @NotNull
+    @Column(name = "type", nullable = false)
     private QuestionType type;
 
     @Column(name = "struct", length = 1024)
@@ -35,11 +39,7 @@ public class Question {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
-    @Transient
-    private Set<Answer> answers;
+    @OneToMany(mappedBy = "question")
+    private Set<OrderedQuestion> order;
 
-    @ManyToMany(mappedBy = "questions")
-    @Transient
-    private Set<Template> template;
 }

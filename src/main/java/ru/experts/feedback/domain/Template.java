@@ -1,5 +1,6 @@
 package ru.experts.feedback.domain;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,9 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Шаблон с вопросами
+ */
 @Entity
 @Builder
 @NoArgsConstructor
@@ -20,30 +24,42 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "name", length=64)
+    @NotNull
+    @Column(name = "name", length=64, nullable = false)
     private String name;
 
-    @Column(name = "create_datetime")
-    private LocalDateTime createDatetime;
+    @Column(name = "comment", length = 1024)
+    private String comment;
 
-    @Column(name = "creator", length=64)
-    private String creator;
+    @NotNull
+    @Column(name = "create_datetime", nullable = false)
+    private LocalDateTime createDatetime;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "templates_questions",
-            joinColumns = @JoinColumn(name = "question_id") ,
-            inverseJoinColumns = @JoinColumn(name = "template_id")
-    )
-    private Set<Question> questions;
+    @Column(name = "is_available")
+    private boolean isAvailable;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private Owner owner;
+
+    @OneToMany(mappedBy = "template")
+    private Set<OrderedQuestion> orderedQuestions;
+
 
     public void setDeleted() {
         isDeleted = true;
     }
 
+    public void setPrivate() {
+        isAvailable = false;
+    }
+
+    public void setAvailable() {
+        isAvailable = true;
+    }
 
     public boolean getIsDeleted(){
         return isDeleted;
