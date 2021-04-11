@@ -2,15 +2,22 @@ package ru.experts.feedback.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ru.experts.feedback.entity.Feedback;
+import ru.experts.feedback.service.FeedbackService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/feedbacks")
 public class FeedbackController {
 
+    @Autowired
+    FeedbackService feedbackService;
+
     @GetMapping()
-    public String getAll(){
-        System.out.println("Get all feedbacks");
-        return null;
+    public List<Feedback> getAll(){
+        return feedbackService.findAll();
     }
 
     @GetMapping("/{id}")
@@ -19,10 +26,14 @@ public class FeedbackController {
         return null;
     }
 
-    @PostMapping("/new")
-    public boolean create(){
-        System.out.println("Create new feedback");
-        return false;
+    @PostMapping()
+    public String addPerson(@RequestBody Feedback feedback) {
+        if(feedback != null) {
+            feedbackService.insert(feedback);
+            return "Added a person";
+        } else {
+            return "Request does not contain a body";
+        }
     }
 
     @DeleteMapping("/{id}")

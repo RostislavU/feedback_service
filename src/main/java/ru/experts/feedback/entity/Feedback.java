@@ -1,4 +1,4 @@
-package ru.experts.feedback.domain;
+package ru.experts.feedback.entity;
 
 import ru.experts.feedback.enums.Service;
 
@@ -25,13 +25,12 @@ public class Feedback {
     @Column(name="is_anonymously")
     private boolean isAnonymously;
 
-    private Service service;
+    //private Service service;
 
     @Column(name="text", length=4096)
     private String text;
 
-    @Column(name = "create_datetime")
-    @Temporal(TemporalType.DATE)
-    private Date createDatetime;
-
+    //    @Column(name = "create_datetime")
+    //    @Temporal(TemporalType.DATE)
+    //    private Date createDatetime;
 }

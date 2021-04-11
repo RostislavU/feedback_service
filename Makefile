@@ -9,7 +9,7 @@ run:
 stop:
 	mvn spring-boot:stop
 
-# Упаковка программы
+# Упmakcаковка программы
 package:
 	mvn package spring-boot:repackage
 	yes | cp -rf target/feedback_service.jar src/main/docker/feedback_service.jar
