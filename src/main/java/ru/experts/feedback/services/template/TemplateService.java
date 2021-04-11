@@ -28,7 +28,7 @@ public class TemplateService {
 
 
     public Template create(EditTemplateRequest request){
-        log.debug("Создание шаблона с именем " + request.getName() + " ( " + request.getCreator() + " )");
+        log.debug("Создание шаблона с именем " + request.getName());
         return templateRepository.save(Template.builder()
                 .name(request.getName())
                 .isDeleted(false)
@@ -56,7 +56,5 @@ public class TemplateService {
                 })
                 .orElseThrow(()-> new NotFoundException("Не найден шаблон с id " + id));
     }
-
-
 
 }
