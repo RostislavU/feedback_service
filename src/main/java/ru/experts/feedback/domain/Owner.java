@@ -3,6 +3,7 @@ package ru.experts.feedback.domain;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.UUID;
  */
 @Data
 @Entity
+@Builder
 @AllArgsConstructor
 @Table(name = "owners")
 public class Owner {
@@ -22,7 +24,7 @@ public class Owner {
     private UUID id;
 
     @NotNull
-    @Column(name = "name", length = 16, nullable = false)
+    @Column(name = "name", length = 64, nullable = false)
     private String name;
 
     @NotNull
@@ -32,6 +34,6 @@ public class Owner {
     @OneToMany(mappedBy = "owner")
     private Set<Template> templates;
 
-    @Column(name = "event", length = 32)
+    @Column(name = "event", length = 64)
     private String event;
 }

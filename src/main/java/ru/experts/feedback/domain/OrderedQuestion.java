@@ -10,6 +10,7 @@ import javax.persistence.*;
  */
 @Data
 @Entity
+@Table(name = "ordered_questions")
 public class OrderedQuestion {
 
     @EmbeddedId

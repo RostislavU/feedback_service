@@ -7,5 +7,5 @@ import ru.experts.feedback.domain.Owner;
 import java.util.UUID;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Owner, UUID> {
+public interface OwnerRepository extends JpaRepository<Owner, UUID> {
 }
