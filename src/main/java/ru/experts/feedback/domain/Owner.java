@@ -23,11 +23,9 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotNull
-    @Column(name = "name", length = 64, nullable = false)
+    @Column(name = "name", length = 64, nullable = false, unique = true)
     private String name;
 
-    @NotNull
     @Column(name = "hash", length = 32, nullable = false)
     private String hash;
 
@@ -36,4 +34,7 @@ public class Owner {
 
     @Column(name = "event", length = 64)
     private String event;
+
+    public Owner(){
+    }
 }

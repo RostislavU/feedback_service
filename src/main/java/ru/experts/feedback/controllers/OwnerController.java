@@ -1,29 +1,27 @@
 package ru.experts.feedback.controllers;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import ru.experts.feedback.domain.Owner;
 import ru.experts.feedback.dto.EditOwnerRequest;
 import ru.experts.feedback.services.OwnerService;
 
+import java.util.List;
+
 @RestController
-@Slf4j
 @RequestMapping("/owners")
 public class OwnerController {
 
+    @Autowired
     private OwnerService ownerService;
 
     @PostMapping("/registration")
-    public boolean registration(@RequestBody EditOwnerRequest request){
-        try {
-            ownerService.registration(request);
-            return true;
-        }
-        catch (Exception ex){
-            log.error(ex.getMessage());
-            return false;
-        }
+    public Owner registration(@RequestBody EditOwnerRequest request){
+            return ownerService.registration(request);
+    }
+
+    @GetMapping()
+    public List<Owner> getAll(){
+        return ownerService.getAll();
     }
 }
