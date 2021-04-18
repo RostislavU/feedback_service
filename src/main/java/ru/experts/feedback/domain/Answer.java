@@ -1,6 +1,5 @@
 package ru.experts.feedback.domain;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +18,6 @@ public class Answer {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private UUID id;
 
-    @NotNull
     @Column(name = "question_id", nullable = false)
     private UUID questionId;
 

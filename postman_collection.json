@@ -6,6 +6,228 @@
 	},
 	"item": [
 		{
+			"name": "owners",
+			"item": [
+				{
+					"name": "Registration (ok)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Пофистал\",\n    \"hash\": \"442c3b32bcd094fb55ee9fc8970cdb3f\",\n    \"event\":\"PofistalEvent\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/owners/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"owners",
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Registration (ok)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Имя пользователя\",\n    \"hash\": \"442c3b32bcd094fb55ee9fc8970cdb3f\",\n    \"event\":\"PofistalEvent\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/owners/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"owners",
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 19 Apr 2021 05:27:00 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"d4653eef-7e65-4619-903c-36c014c26105\",\n    \"name\": \"Имя пользователя\",\n    \"templateDtoSet\": [\n        {\n            \"id\": \"05c2d6b8-e537-4192-be0c-4d2e612eb1e3\",\n            \"name\": \"Первый шаблон\",\n            \"comment\": \"Тестовый шаблон, параметры которого можно изменить\",\n            \"createDateTime\": \"2021-04-19 05:27:00\",\n            \"orderedQuestions\": null\n        }\n    ],\n    \"event\": \"PofistalEvent\",\n    \"createDatetime\": \"2021-04-19 05:27:00\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all owners",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/owners",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"owners"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all owners (ok)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/owners",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"owners"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 20 Apr 2021 17:35:50 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"7061d9e4-bf62-41c5-965e-b1734a3c525b\",\n        \"name\": \"Имя пользователя\",\n        \"templateDtoSet\": [\n            {\n                \"id\": \"1b821ada-8401-401e-a6ef-debfa7d08e9e\",\n                \"name\": \"Первый шаблон\",\n                \"comment\": \"Тестовый шаблон, параметры которого можно изменить\",\n                \"createDateTime\": \"2021-04-20 17:35:46\",\n                \"orderedQuestions\": []\n            }\n        ],\n        \"event\": \"PofistalEvent\",\n        \"createDatetime\": \"2021-04-20 17:35:50\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get owner by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/owners/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"owners",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "a9556d94-6ab8-43b0-a4ee-510291412a02"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get owner by id (ok)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/owners/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"owners",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7061d9e4-bf62-41c5-965e-b1734a3c525b"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 20 Apr 2021 17:37:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"7061d9e4-bf62-41c5-965e-b1734a3c525b\",\n    \"name\": \"Имя пользователя\",\n    \"templateDtoSet\": [\n        {\n            \"id\": \"1b821ada-8401-401e-a6ef-debfa7d08e9e\",\n            \"name\": \"Первый шаблон\",\n            \"comment\": \"Тестовый шаблон, параметры которого можно изменить\",\n            \"createDateTime\": \"2021-04-20 17:35:46\",\n            \"orderedQuestions\": []\n        }\n    ],\n    \"event\": \"PofistalEvent\",\n    \"createDatetime\": \"2021-04-20 17:37:13\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "feedbacks",
 			"item": [
 				{
@@ -104,153 +326,6 @@
 			]
 		},
 		{
-			"name": "templates",
-			"item": [
-				{
-					"name": "All Templates",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/templates",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"templates"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "template by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/templates/:id",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"templates",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "cdb78115-2221-49d2-8ef8-22dc196eb0cc",
-									"description": "Id отзыва"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "template by id",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/templates/:id",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"templates",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "New template",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/templates/create",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"templates",
-								"create"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "owners",
-			"item": [
-				{
-					"name": "Registration",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Пофистал1\",\n    \"hash\": \"442c3b32bcd094fb55ee9fc8970cdb3f\",\n    \"event\":\"ц\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/owners/registration",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"owners",
-								"registration"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all owners",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/owners",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"owners"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "questions",
 			"item": [
 				{
@@ -315,6 +390,104 @@
 							],
 							"path": [
 								"questions",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "templates",
+			"item": [
+				{
+					"name": "All Templates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/templates",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "template by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/templates/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"templates",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "75b46513-8ae6-41c6-84a2-9c94d571c72c",
+									"description": "Id шаблона"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "template by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/templates/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"templates",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ownerId\":\"10957394-8261-41e5-b718-b91d9c17be30\",\n    \"name\": \"Шаблон 1\",\n    \"comment\": \"Шаблон стандартного опросника\",\n    \"is_available\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/templates/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"templates",
 								"create"
 							]
 						}

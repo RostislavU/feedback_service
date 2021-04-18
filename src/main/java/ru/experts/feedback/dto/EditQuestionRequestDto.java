@@ -9,12 +9,10 @@ import ru.experts.feedback.enums.QuestionType;
 /**
  * Сущность для изменения/создания вопроса
  */
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditQuestionRequest {
+public class EditQuestionRequestDto {
     private String text;
     private QuestionType type;
     private String struct;

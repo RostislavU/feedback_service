@@ -1,4 +1,4 @@
-# feedback_service
+# Feedback service
 
 - java
 - spring

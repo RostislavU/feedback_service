@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.experts.feedback.domain.Question;
-import ru.experts.feedback.dto.EditQuestionRequest;
+import ru.experts.feedback.dto.EditQuestionRequestDto;
 import ru.experts.feedback.exceptions.NotFoundException;
 import ru.experts.feedback.repositories.QuestionRepository;
 
@@ -36,7 +36,7 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
-    public Question create(EditQuestionRequest request){
+    public Question create(EditQuestionRequestDto request){
         log.debug("Создание вопроса");
         Question question =  Question.builder()
                 .text(request.getText())

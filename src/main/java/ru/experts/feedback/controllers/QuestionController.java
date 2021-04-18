@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.experts.feedback.domain.Question;
-import ru.experts.feedback.dto.EditQuestionRequest;
+import ru.experts.feedback.dto.EditQuestionRequestDto;
 import ru.experts.feedback.services.question.QuestionService;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class QuestionController {
     }
 
     @PostMapping("/create")
-    public Question create(@RequestBody EditQuestionRequest request){
+    public Question create(@RequestBody EditQuestionRequestDto request){
         return questionService.create(request);
     }
 

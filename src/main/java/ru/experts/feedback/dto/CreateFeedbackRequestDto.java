@@ -14,7 +14,8 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditFeedbackRequest {
+public class CreateFeedbackRequestDto {
+
     private UUID ownerId;
     private UUID templateId;
     private String email;

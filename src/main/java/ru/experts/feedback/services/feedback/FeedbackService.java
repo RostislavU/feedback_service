@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.experts.feedback.domain.CreationInfo;
 import ru.experts.feedback.domain.Feedback;
-import ru.experts.feedback.dto.EditFeedbackRequest;
+import ru.experts.feedback.dto.CreateFeedbackRequestDto;
 import ru.experts.feedback.exceptions.NotFoundException;
 import ru.experts.feedback.repositories.FeedbackRepository;
 
@@ -19,7 +19,7 @@ public class FeedbackService {
         this.feedbackRepository = feedbackRepository;
     }
 
-    public Feedback createForOwner(EditFeedbackRequest request, UUID templateId){
+    public Feedback createForOwner(CreateFeedbackRequestDto request, UUID templateId){
         log.debug("Создание обратной связи");
         return Feedback.builder()
                 .creationInfo(new CreationInfo(request.getFullName(),request.getEmail()))

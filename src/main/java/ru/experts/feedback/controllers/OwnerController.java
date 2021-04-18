@@ -3,10 +3,12 @@ package ru.experts.feedback.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.experts.feedback.domain.Owner;
-import ru.experts.feedback.dto.EditOwnerRequest;
+import ru.experts.feedback.dto.owner.CreateOwnerRequestDto;
+import ru.experts.feedback.dto.owner.OwnerDto;
 import ru.experts.feedback.services.OwnerService;
 
-import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/owners")
@@ -16,12 +18,17 @@ public class OwnerController {
     private OwnerService ownerService;
 
     @PostMapping("/registration")
-    public Owner registration(@RequestBody EditOwnerRequest request){
+    public OwnerDto registration(@RequestBody CreateOwnerRequestDto request){
             return ownerService.registration(request);
     }
 
     @GetMapping()
-    public List<Owner> getAll(){
+    public Set<OwnerDto> getAll(){
         return ownerService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public OwnerDto getById(@PathVariable("id") UUID id){
+        return ownerService.getById(id);
     }
 }

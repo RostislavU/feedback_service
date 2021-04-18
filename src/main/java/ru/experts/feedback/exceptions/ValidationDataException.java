@@ -12,6 +12,7 @@ public class ValidationDataException extends RuntimeException {
 
 @ControllerAdvice
 class ValidationDataAdvice {
+
     @ResponseBody
     @ExceptionHandler(ValidationDataException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

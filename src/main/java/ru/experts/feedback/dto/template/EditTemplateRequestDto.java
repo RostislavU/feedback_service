@@ -1,6 +1,8 @@
-package ru.experts.feedback.dto;
+package ru.experts.feedback.dto.template;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,11 +13,14 @@ import java.util.UUID;
  */
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditTemplateRequest {
+public class EditTemplateRequestDto {
+    @NotNull
     private UUID ownerId;
+    @NotNull
     private String name;
     private String comment;
-    private boolean is_available;
+    private boolean isAvailable;
 }

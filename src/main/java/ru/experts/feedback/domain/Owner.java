@@ -2,10 +2,11 @@ package ru.experts.feedback.domain;
 
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,6 +17,8 @@ import java.util.UUID;
 @Entity
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @Table(name = "owners")
 public class Owner {
 
@@ -35,6 +38,20 @@ public class Owner {
     @Column(name = "event", length = 64)
     private String event;
 
-    public Owner(){
+    @Column(name = "create_datetime", nullable = false)
+    private LocalDateTime createDatetime;
+
+    @Override
+    @Transient
+    public String toString(){
+        return  "Id: " + id + "\n" +
+                "Name: " + name + "\n" + "\n" +
+                "CreateDatetime: " + createDatetime;
+    }
+
+    @Override
+    @Transient
+    public int hashCode() {
+        return Objects.hash(id, name, createDatetime);
     }
 }

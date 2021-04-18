@@ -1,4 +1,4 @@
-package ru.experts.feedback.dto;
+package ru.experts.feedback.dto.owner;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditOwnerRequest {
+public class CreateOwnerRequestDto {
     @NotNull
     @Size(min = 3, max=64)
     private String name;

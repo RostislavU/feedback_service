@@ -1,8 +1,9 @@
 package ru.experts.feedback.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.experts.feedback.domain.Template;
-import ru.experts.feedback.dto.EditTemplateRequest;
+import ru.experts.feedback.dto.template.EditTemplateRequestDto;
 import ru.experts.feedback.services.template.TemplateService;
 
 import java.util.List;
@@ -12,8 +13,10 @@ import java.util.UUID;
 @RequestMapping("/templates")
 public class TemplateController {
 
-    private TemplateService templateService;
+    public TemplateController(){}
 
+    @Autowired
+    private TemplateService templateService;
 
     @GetMapping()
     public List<Template> getAll(){
@@ -26,7 +29,7 @@ public class TemplateController {
     }
 
     @PostMapping("/create")
-    public Template create(@RequestBody EditTemplateRequest request){
+    public Template create(@RequestBody EditTemplateRequestDto request){
         return templateService.create(request);
     }
 
