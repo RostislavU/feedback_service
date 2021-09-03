@@ -1,5 +1,6 @@
 package ru.experts.feedback.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,11 +12,12 @@ import java.util.UUID;
  */
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @Table(name = "answers")
 public class Answer {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = "question_id", nullable = false)
@@ -31,4 +33,7 @@ public class Answer {
     @JoinColumn(name = "feedback_id", referencedColumnName = "id")
     private Feedback feedback;
 
+    public boolean forFeedback(UUID feedback_id){
+        return this.getFeedback().getId()==feedback_id;
+    }
 }

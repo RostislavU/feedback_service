@@ -18,17 +18,17 @@ public class OwnerController {
     private OwnerService ownerService;
 
     @PostMapping("/registration")
-    public OwnerDto registration(@RequestBody CreateOwnerRequestDto request){
-            return ownerService.registration(request);
+    public OwnerDto registration(@RequestBody CreateOwnerRequestDto request) {
+        return ownerService.registration(request);
     }
 
     @GetMapping()
-    public Set<OwnerDto> getAll(){
+    public Set<OwnerDto> getAll() {
         return ownerService.getAll();
     }
 
     @GetMapping("/{id}")
-    public OwnerDto getById(@PathVariable("id") UUID id){
+    public OwnerDto getById(@PathVariable("id") UUID id) {
         return ownerService.getById(id);
     }
 }

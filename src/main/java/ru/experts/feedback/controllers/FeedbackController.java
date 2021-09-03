@@ -21,19 +21,19 @@ public class FeedbackController {
     }
 
     @GetMapping()
-    public List<Feedback> getAll(){
+    public List<Feedback> getAll() {
         log.debug("get all feedbacks");
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Feedback getById(@PathVariable("id") UUID id){
+    public Feedback getById(@PathVariable("id") UUID id) {
         log.debug("get feedback by id" + id);
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Не найден фидбек с id" + id));
     }
 
     @PostMapping("/create")
-    public Feedback create(@RequestBody Feedback feedback){
+    public Feedback create(@RequestBody Feedback feedback) {
         log.debug("Create new feedback");
         return repository.save(feedback);
     }

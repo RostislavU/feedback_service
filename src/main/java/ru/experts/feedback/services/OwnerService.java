@@ -1,6 +1,8 @@
 package ru.experts.feedback.services;
 
+import com.sun.xml.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import ru.experts.feedback.repositories.OwnerRepository;
 import ru.experts.feedback.repositories.TemplateRepository;
 import ru.experts.feedback.services.template.TemplateService;
 
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +43,7 @@ public class OwnerService {
         this.ownerRepository = ownerRepository;
     }
 
-    public OwnerDto registration(CreateOwnerRequestDto request) throws ValidationDataException{
+    public OwnerDto registration(CreateOwnerRequestDto request) throws ValidationDataException {
 
         Owner owner;
         OwnerBuilder ownerBuilder = Owner.builder()
@@ -47,16 +51,16 @@ public class OwnerService {
                 .hash(request.getHash())
                 .name(request.getName());
 
-        if (request.getEvent()!=null){
+        if (request.getEvent() != null) {
             ownerBuilder.event(request.getEvent());
         }
 
         try {
             owner = ownerRepository.save(ownerBuilder.build());
-        }
-        catch (DataIntegrityViolationException ex){
+        } catch (DataIntegrityViolationException ex) {
             throw new ValidationDataException("Некорректный формат входных данных");
         }
+        // TODO: Доработать обработчик исключения, обогащать ответ ошибкой помимо кода ответа
 
         EditTemplateRequestDto templateRequestDto = new EditTemplateRequestDto(owner.getId(),
                 "Первый шаблон",
@@ -68,21 +72,20 @@ public class OwnerService {
         return new OwnerToDtoConverter().convert(owner);
     }
 
-    public Set<OwnerDto> getAll(){
+    public Set<OwnerDto> getAll() {
 
         final List<Owner> owners = ownerRepository.findAll();
-
         Set<OwnerDto> ownerDtoSet = new HashSet<>();
-        for (Owner owner:
-             owners) {
+        for (Owner owner :
+                owners) {
             ownerDtoSet.add(new OwnerToDtoConverter().convert(owner));
         }
 
         return ownerDtoSet;
     }
 
-    public OwnerDto getById(UUID id){
-        final Owner owner = ownerRepository.findById(id).orElseThrow(()->new NotFoundException("Пользователь не найден"));
+    public OwnerDto getById(UUID id) {
+        final Owner owner = ownerRepository.findById(id).orElseThrow(() -> new NotFoundException("Пользователь не найден"));
         return new OwnerToDtoConverter().convert(owner);
     }
 }

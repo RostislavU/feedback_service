@@ -7,20 +7,20 @@ import java.time.LocalDateTime;
 
 @Embeddable
 public class CreationInfo {
-    private String creator_name;
-    private String creator_email;
+    private String creatorName;
+    private String creatorEmail;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime create_date;
+    private LocalDateTime createDate;
 
     public CreationInfo(String name, String email){
-        creator_name = name;
-        creator_email = email;
-        create_date = LocalDateTime.now();
+        creatorName = name;
+        creatorEmail = email;
+        createDate = LocalDateTime.now();
     }
     @Override
     public String toString(){
-        return "Creator:" + creator_name + "\n" +
-                "Time"  + create_date;
+        return "Creator:" + creatorName + "\n" +
+                "Time"  + createDate;
     }
 
 }

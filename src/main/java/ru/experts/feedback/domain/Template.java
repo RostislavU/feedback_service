@@ -18,7 +18,6 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Table(name = "templates")
 public class Template {
 
@@ -26,12 +25,13 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "name", length=64, nullable = false)
+    @Column(name = "name", length = 64, nullable = false)
     private String name;
 
     @Column(name = "comment", length = 1024)
     private String comment;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "create_datetime", nullable = false)
     private LocalDateTime createDatetime;
 
@@ -41,6 +41,7 @@ public class Template {
     @Column(name = "is_available")
     private boolean isAvailable;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private Owner owner;
@@ -50,7 +51,7 @@ public class Template {
 
     @Override
     @Transient
-    public String toString(){
+    public String toString() {
         return "Id: " + id + "\n" +
                 "Name: " + name + "\n" +
                 "Comment: " + comment + "\n" +
@@ -60,6 +61,14 @@ public class Template {
     @Override
     @Transient
     public int hashCode() {
-        return Objects.hash(id, name, createDatetime);
+        return Objects.hash(id, createDatetime);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Template)) return false;
+        Template template = (Template) o;
+        return isDeleted == template.isDeleted && isAvailable == template.isAvailable && id.equals(template.id) && name.equals(template.name) && Objects.equals(comment, template.comment) && createDatetime.equals(template.createDatetime) && owner.equals(template.owner) && Objects.equals(orderedQuestions, template.orderedQuestions);
     }
 }

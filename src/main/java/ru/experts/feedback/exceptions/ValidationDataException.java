@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class ValidationDataException extends RuntimeException {
-    public ValidationDataException(String message) {super();}
+    public ValidationDataException(String message) {
+        super();
+    }
 }
+
 
 @ControllerAdvice
 class ValidationDataAdvice {

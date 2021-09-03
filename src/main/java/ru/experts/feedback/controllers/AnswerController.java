@@ -1,10 +1,14 @@
 package ru.experts.feedback.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.experts.feedback.domain.Answer;
+import ru.experts.feedback.dto.answer.EditAnswerRequestDto;
 import ru.experts.feedback.exceptions.NotFoundException;
 import ru.experts.feedback.repositories.AnswerRepository;
+import ru.experts.feedback.services.answer.AnswerService;
+import ru.experts.feedback.services.template.TemplateService;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,28 +18,28 @@ import java.util.UUID;
 @RequestMapping("/answers")
 public class AnswerController {
 
-    private final AnswerRepository repository;
-
-    public AnswerController(AnswerRepository repository) {
-        this.repository = repository;
+    public AnswerController() {
     }
 
-    @GetMapping()
-    public List<Answer> getAll(){
+    @Autowired
+    private AnswerService answerService;
+
+    @GetMapping("/{feedback_id}")
+    public List<Answer> getAll(@PathVariable("feedback_id") UUID feedback_id) {
         log.debug("Get all answers");
-        return repository.findAll();
+        return answerService.getAll(feedback_id);
     }
 
-    @GetMapping("/{id}")
-    public Answer getById(@PathVariable("id") UUID id){
+    @GetMapping("/{answer_id}")
+    public Answer getById(@PathVariable("answer_id") UUID id) {
         log.debug("Get answer by id" + id);
-        return repository.findById(id).orElseThrow(() -> new NotFoundException("Не найден ответ с id " + id));
+        return answerService.getById(id);
     }
 
-    @PostMapping("/create")
-    public void create(@RequestBody Answer answer){
+    @PostMapping("{feedback_id}/add")
+    public void create(@PathVariable("feedback_id") UUID feedback_id, @RequestBody EditAnswerRequestDto editAnswerRequestDto) {
         log.debug("Create new answer");
-        repository.save(answer);
+        answerService.create(feedback_id, editAnswerRequestDto);
     }
 
 }

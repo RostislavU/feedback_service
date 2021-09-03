@@ -1,6 +1,7 @@
 package ru.experts.feedback.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -18,7 +19,6 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @Table(name = "owners")
 public class Owner {
 
@@ -38,13 +38,14 @@ public class Owner {
     @Column(name = "event", length = 64)
     private String event;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "create_datetime", nullable = false)
     private LocalDateTime createDatetime;
 
     @Override
     @Transient
-    public String toString(){
-        return  "Id: " + id + "\n" +
+    public String toString() {
+        return "Id: " + id + "\n" +
                 "Name: " + name + "\n" + "\n" +
                 "CreateDatetime: " + createDatetime;
     }
@@ -52,6 +53,14 @@ public class Owner {
     @Override
     @Transient
     public int hashCode() {
-        return Objects.hash(id, name, createDatetime);
+        return Objects.hash(id, createDatetime);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Owner)) return false;
+        Owner owner = (Owner) o;
+        return id.equals(owner.id) && Objects.equals(name, owner.name) && hash.equals(owner.hash) && Objects.equals(templates, owner.templates) && Objects.equals(event, owner.event) && createDatetime.equals(owner.createDatetime);
     }
 }

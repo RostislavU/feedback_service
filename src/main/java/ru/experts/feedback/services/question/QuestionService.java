@@ -22,23 +22,23 @@ public class QuestionService {
     }
 
     @Autowired
-    public void setQuestionRepository(QuestionRepository questionRepository){
+    public void setQuestionRepository(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 
-    public Question getById(UUID id){
+    public Question getById(UUID id) {
         log.debug("Запрос вопроса по id: " + id);
-        return questionRepository.findById(id).orElseThrow(()-> new NotFoundException("Не найден вопрос с id: " + id));
+        return questionRepository.findById(id).orElseThrow(() -> new NotFoundException("Не найден вопрос с id: " + id));
     }
 
-    public List<Question> getAll(){
+    public List<Question> getAll() {
         log.debug("Запрос всех вопросов");
         return questionRepository.findAll();
     }
 
-    public Question create(EditQuestionRequestDto request){
+    public Question create(EditQuestionRequestDto request) {
         log.debug("Создание вопроса");
-        Question question =  Question.builder()
+        Question question = Question.builder()
                 .text(request.getText())
                 .isDeleted(false)
                 .struct(request.getStruct())
@@ -48,12 +48,13 @@ public class QuestionService {
         return question;
     }
 
-    public void deleteById(UUID id){
-        log.debug("Удаление вопроса с id:"  + id);
+    public void deleteById(UUID id) {
+        log.debug("Удаление вопроса с id:" + id);
         questionRepository.save(
                 questionRepository.findById(id).map(question -> {
-                    question.setDeleted(true);
-                    return question;})
+                            question.setDeleted(true);
+                            return question;
+                        })
                         .orElseThrow(() -> new NotFoundException("Не удалось найти вопрос с id: " + id)));
     }
 }

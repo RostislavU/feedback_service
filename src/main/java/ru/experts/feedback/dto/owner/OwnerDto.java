@@ -21,9 +21,9 @@ public class OwnerDto {
     private UUID id;
     @NotNull
     private String name;
-    private Set<TemplateDto> templateDtoSet;
+    private Set<TemplateDto> templates;
     private String event;
     @NotNull
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDatetime;
 }

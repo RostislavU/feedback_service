@@ -15,7 +15,7 @@ import java.util.Set;
 public class OwnerToDtoConverter implements Converter<Owner, OwnerDto> {
 
     @Override
-    public OwnerDto convert(Owner owner) {;
+    public OwnerDto convert(Owner owner) {
         Set<TemplateDto> templateDtoSet = new HashSet<>();
         for (Template temp:
                 owner.getTemplates()) {
@@ -26,7 +26,7 @@ public class OwnerToDtoConverter implements Converter<Owner, OwnerDto> {
                 .id(owner.getId())
                 .createDatetime(LocalDateTime.now())
                 .name(owner.getName())
-                .templateDtoSet(templateDtoSet)
+                .templates(templateDtoSet)
                 .event(owner.getEvent())
                 .build();
     }

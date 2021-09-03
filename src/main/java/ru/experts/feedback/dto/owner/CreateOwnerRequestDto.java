@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class CreateOwnerRequestDto {
     @NotNull
-    @Size(min = 3, max=64)
+    @Size(min = 3, max = 64)
     private String name;
 
     @NotNull

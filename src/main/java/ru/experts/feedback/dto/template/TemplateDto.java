@@ -23,7 +23,7 @@ public class TemplateDto {
     @NotNull
     private String name;
     private String comment;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDateTime;
     private Set<OrderedQuestion> orderedQuestions;
 }

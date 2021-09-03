@@ -19,18 +19,18 @@ public class FeedbackService {
         this.feedbackRepository = feedbackRepository;
     }
 
-    public Feedback createForOwner(CreateFeedbackRequestDto request, UUID templateId){
+    public Feedback createForOwner(CreateFeedbackRequestDto request, UUID templateId) {
         log.debug("Создание обратной связи");
         return Feedback.builder()
-                .creationInfo(new CreationInfo(request.getFullName(),request.getEmail()))
+                .creationInfo(new CreationInfo(request.getFullName(), request.getEmail()))
                 .templateId(templateId)
                 .answers(request.getAnswers())
                 .isRead(false)
                 .build();
     }
 
-    public Feedback getById(UUID id){
+    public Feedback getById(UUID id) {
         log.debug("Запрос шаблона по id" + id);
-        return feedbackRepository.findById(id).orElseThrow(()-> new NotFoundException("Не найдена обратная связь с id " + id));
+        return feedbackRepository.findById(id).orElseThrow(() -> new NotFoundException("Не найдена обратная связь с id " + id));
     }
 }

@@ -13,31 +13,36 @@ import java.util.UUID;
 @RequestMapping("/templates")
 public class TemplateController {
 
-    public TemplateController(){}
+    public TemplateController() {
+    }
 
     @Autowired
     private TemplateService templateService;
 
     @GetMapping()
-    public List<Template> getAll(){
-        return templateService.getAll();
+    public List<Template> getAllAvailable() {
+        return templateService.getAllAvailable();
     }
 
-    @GetMapping("/{id}")
-    public Template getById(@PathVariable("id") UUID id){
+    @GetMapping("/{template-id}")
+    public Template getById(@PathVariable("template-id") UUID id) {
         return templateService.getById(id);
     }
 
     @PostMapping("/create")
-    public Template create(@RequestBody EditTemplateRequestDto request){
+    public Template create(@RequestBody EditTemplateRequestDto request) {
         return templateService.create(request);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable("id") UUID id){
+    @DeleteMapping("/delete/{template-id}")
+    public void delete(@PathVariable("template-id") UUID id) {
         templateService.delete(id);
     }
 
+    @PostMapping("/edit/{template-id}")
+    public Template edit(@PathVariable("template-id") UUID id, @RequestBody EditTemplateRequestDto request) {
+        return templateService.editTemplate(id, request);
+    }
     /*
     @GetMapping("/{template-id}/add-question/{question-id}")
     public Template addQuestion(@PathVariable("template-id") UUID templateId, @PathVariable("question-id") UUID questionId){
