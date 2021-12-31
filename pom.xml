@@ -22,7 +22,7 @@
     <postgresql.version>42.2.19</postgresql.version>
     <logback.version>1.2.3</logback.version>
     <jackson.version>2.12.2</jackson.version>
-    <slf4j.version>1.7.30</slf4j.version>
+    <slf4j.version>1.7.32</slf4j.version>
   </properties>
 
   <dependencies>
@@ -33,6 +33,18 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.hamcrest</groupId>
+          <artifactId>hamcrest-core</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <!-- Spring -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -162,7 +174,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>RELEASE</version>
+      <version>1.18.22</version>
       <scope>compile</scope>
     </dependency>
 
